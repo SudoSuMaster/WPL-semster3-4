@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeoff
+  namespace: levano-tst
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timeoff
+  template:
+    metadata:
+      labels:
+        app: timeoff
+    spec:
+      containers:
+        - name: timeoff
+          image: tigron/timeoff-management:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: timeoff-config
+            - secretRef:
+                name: timeoff-ldap-secret
+          volumeMounts:
+            - name: data
+              mountPath: /app/db
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: timeoff-pvc
