@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: timeoff
+  name: orangehrm
 spec:
   replicas: 1
   template:
     spec:
       containers:
-        - name: timeoff
-          image: tigron/timeoff-management:latest
+        - name: orangehrm
+          image: orangehrm/orangehrm:5.8.1
           imagePullPolicy: IfNotPresent
