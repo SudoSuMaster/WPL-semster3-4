@@ -41,6 +41,8 @@ De technische basis van het ontwerp bestaat uit GitOps met Argo CD, packaging me
 De platformarchitectuur bestaat uit meerdere lagen. In Git worden de chartdefinities, values-bestanden en eventuele overlays opgeslagen. Argo CD leest deze configuratie uit en zet de gewenste toestand om naar deployments in het Kubernetes-cluster [4]. Containerimages worden geleverd vanuit Harbor, dat artifacts opslaat en image scanning ondersteunt [7][15].
 
 Binnen het cluster draaien de applicatiecomponenten als Deployments en worden zij ontsloten via Services en Ingress. Voor stateful data wordt gebruikgemaakt van PersistentVolumeClaims. Voor backup en herstel van applicatiedata en volumes is Kasten opgenomen in het ontwerp, omdat deze oplossing specifiek is gericht op Kubernetes backup, restore en disaster recovery [8][13][14].
+<img width="1486" height="836" alt="image" src="https://github.com/user-attachments/assets/f93df3f2-cfac-4a9c-94f2-4e28a9c72fd0" />
+
 
 ## Softwareontwerp TimeOff.Management
 TimeOff.Management is in dit ontwerp de eerste oplossingsrichting. Functioneel is deze applicatie gericht op afwezigheidsregistratie, teamoverzicht en verlofaanvragen, waardoor zij goed aansluit op het primaire doel van de opdracht [11]. De softwarearchitectuur is relatief compact en bestaat uit een webapplicatiecontainer, service, ingress en persistente opslag voor de applicatiedata [11].
