@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: timeoff-ingress
+  namespace: levano-tst
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: stepca
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: timeoff.test.bcp.mindef.nl
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: timeoff
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - timeoff.test.bcp.mindef.nl
+      secretName: timeoff-tls
