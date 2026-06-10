@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: timeoff-config
+  namespace: levano-tst
+data:
+  NODE_ENV: "production"
+  LDAP_ENABLED: "true"
+  LDAP_URL: "ldaps://ldap.example.local:636"
+  LDAP_BIND_DN: "CN=svc-timeoff,OU=Service Accounts,DC=example,DC=local"
+  LDAP_SEARCH_BASE: "OU=Users,DC=example,DC=local"
+  LDAP_MAIL_ATTRIBUTE: "mail"
+  LDAP_USERNAME_ATTRIBUTE: "sAMAccountName"
