@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orangehrm-config
+  namespace: hrm
+data:
+  DB_HOST: mariadb
+  DB_PORT: "3306"
+  DB_NAME: orangehrm
+  DB_USER: orangehrm
