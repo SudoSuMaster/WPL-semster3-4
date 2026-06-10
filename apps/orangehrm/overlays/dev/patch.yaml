@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeoff
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: timeoff
+          image: tigron/timeoff-management:latest
+          imagePullPolicy: IfNotPresent
