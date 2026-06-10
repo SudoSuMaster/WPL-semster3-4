@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeoff
+  namespace: levano-tst
+spec:
+  selector:
+    app: timeoff
+  ports:
+    - port: 80
+      targetPort: 3000
