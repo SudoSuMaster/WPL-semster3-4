@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orangehrm
+  namespace: hrm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orangehrm
+  template:
+    metadata:
+      labels:
+        app: orangehrm
+    spec:
+      initContainers:
+        - name: wait-for-mariadb
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              until nc -z mariadb 3306; do sleep 3; done
+      containers:
+        - name: orangehrm
+          image: orangehrm/orangehrm:5.8.1
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: orangehrm-config
+            - secretRef:
+                name: orangehrm-db-secret
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
